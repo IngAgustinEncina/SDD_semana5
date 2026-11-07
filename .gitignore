@@ -1,0 +1,18 @@
+# Dependencias locales de herramientas
+.opencode/node_modules/
+
+# Sistema operativo y editores
+Thumbs.db
+Desktop.ini
+.DS_Store
+*.swp
+*~
+
+# Logs y temporales
+*.log
+*.tmp
+*.bak
+
+# Configuración local (no versionar credenciales)
+.env
+.env.local

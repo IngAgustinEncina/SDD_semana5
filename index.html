@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>App de Comentarios</title>
+  <link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+  <header class="cabecera">
+    <h1>App de Comentarios</h1>
+  </header>
+
+  <main class="contenedor">
+    <section id="publicacion" class="panel" aria-labelledby="titulo-publicacion">
+      <h2 id="titulo-publicacion">Publicar un comentario</h2>
+
+      <form id="form-comentario" class="formulario" novalidate>
+        <div class="campo">
+          <label for="autor-comentario">Autor</label>
+          <input id="autor-comentario" name="autor" type="text" maxlength="60" autocomplete="nickname" aria-describedby="ayuda-autor" required>
+          <p id="ayuda-autor" class="ayuda">Se muestra como “declarado por”. No es una cuenta ni una identidad verificada.</p>
+        </div>
+
+        <div class="campo">
+          <label for="texto-comentario">Comentario</label>
+          <textarea id="texto-comentario" name="texto" rows="4" aria-describedby="contador-comentario" required></textarea>
+          <p id="contador-comentario" class="contador">0 / 500</p>
+        </div>
+
+        <div class="acciones-formulario">
+          <button type="submit" class="boton">Publicar comentario</button>
+        </div>
+
+        <p id="estado-publicacion" class="estado estado-error" role="alert" hidden></p>
+      </form>
+    </section>
+
+    <section id="conversacion" class="panel" aria-labelledby="titulo-conversacion">
+      <h2 id="titulo-conversacion">Conversación</h2>
+      <div id="lista-conversacion" class="lista-conversacion"></div>
+      <p id="estado-vacio" class="estado" hidden>Todavía no hay comentarios. Sé el primero en participar.</p>
+      <p id="estado-error" class="estado estado-error" role="alert" hidden></p>
+    </section>
+  </main>
+
+  <script src="assets/js/app.js" defer></script>
+</body>
+</html>
