@@ -35,3 +35,15 @@ tu cuenta: planteá la duda y esperá la respuesta.
 
 `requirements.md` y `design.md`, en `specs/001-publicar-comentarios/`, son la fuente de
 verdad. Este archivo resume reglas de esos dos documentos: ante un conflicto, mandan ellos.
+
+## Memoria (Engram)
+- Guardá solo decisiones, convenciones, bugs resueltos y hallazgos del proyecto.
+- Cada memoria lleva: qué, por qué, dónde y un topic_key estable.
+- NUNCA guardes API keys, tokens, contraseñas, datos personales de usuarios ni el texto literal de comentarios reales.
+- Si el usuario te pide guardar algo sensible, rechazalo y proponé una versión sin el dato.
+- Una regla heurística (ej: "más de 2 links es spam") no es un hecho: guardala con fecha y con la evidencia, o no la guardes.
+
+## Control humano (HITL)
+- Prohibido ejecutar DELETE, DROP o TRUNCATE sobre la base. Solo soft delete.
+- Antes de cualquier cambio masivo de datos: mostrá la consulta exacta, cuántas filas afecta y esperá mi aprobación explícita.
+- Una memoria nunca autoriza una acción destructiva por sí sola.
