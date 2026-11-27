@@ -1,5 +1,8 @@
 # Dependencias locales de herramientas
 .opencode/node_modules/
+/vendor/
+/build/
+.phpunit.cache/
 
 # Sistema operativo y editores
 Thumbs.db
