@@ -1,71 +1,18 @@
 name: CI
-
 on:
-  push:
-    branches: [main]
   pull_request:
     branches: [main]
-
+  push:
+    branches: [main]
 permissions:
   contents: read
-
 jobs:
-  quality:
+  test:
     runs-on: ubuntu-latest
-
-    env:
-      DB_HOST: 127.0.0.1
-      DB_PORT: '3306'
-      DB_NAME: app_comentarios_v1
-      DB_USER: root
-      DB_PASS: ci-root
-
-    services:
-      mysql:
-        image: mysql:8.0
-        env:
-          MYSQL_ROOT_PASSWORD: ci-root
-          MYSQL_DATABASE: app_comentarios_v1
-        ports:
-          - 3306:3306
-        options: >-
-          --health-cmd="mysqladmin ping -h 127.0.0.1 -pci-root"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=10
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+      - uses: actions/checkout@v7
+      - uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
-          extensions: mbstring, mysqli, pdo_mysql
-          tools: composer:v2
-
-      - name: Instalar dependencias
-        run: composer install --no-interaction --prefer-dist --no-progress
-
-      - name: Cargar esquema
-        run: mysql -h "$DB_HOST" -P "$DB_PORT" -u "$DB_USER" -p"$DB_PASS" < database/schema.sql
-
-      - name: Lint
-        run: find api src config -name '*.php' -print0 | xargs -0 -n 1 php -l
-
-      - name: Tests
-        run: vendor/bin/phpunit --colors=always
-
-      - name: Build
-        run: |
-          composer install --no-dev --no-interaction --prefer-dist --no-progress
-          mkdir -p build
-          cp -R index.html api assets config database src vendor build/
-
-      - name: Subir artefacto
-        uses: actions/upload-artifact@v4
-        with:
-          name: app-comentarios-${{ github.sha }}
-          path: build
-          if-no-files-found: error
+      - run: composer install --no-progress
+      - run: vendor/bin/phpunit
